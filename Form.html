@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Upload Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header styles */
+    .header {
+      background-color: white;
+      padding: 10px 20px;
+      color: black;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      margin-top: 0px;
+      margin-bottom: 20px;
+    }
+
+    /* Profile icon container */
+    .profile-icon img,
+    .icon img {
+      width: 60px; /* Set the width to 60px */
+    }
+
+    /* Open button styles */
+    .open-btn {
+      background-color: white;
+      color: black;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Right button styles */
+    .right-btn {
+      background-color: #d45a00;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      font-size: 12px;
+    }
+    .icon {
+      width: 20px;
+    }
+
+    /* Header div styles */
+    .header-div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 20px;
+      padding: 20px 0; /* Add 20px padding top and bottom */
+    }
+
+    h1 {
+      margin: 0px;
+    }
+
+    /* Left navbar styles */
+    .navbar {
+      width: 200px;
+      height: 100vh;
+      background-color: white;
+      color: black;
+      position: fixed;
+      top: 0;
+      left: -200px;
+      overflow-y: auto;
+      padding-top: 120px;
+      transition: left 0.3s ease;
+      z-index: 99; /* Set a lower z-index for the navbar */
+      border-right: 1px solid #ccc;
+    }
+
+    .navbar a,
+    .close-btn {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
+    }
+
+    .navbar a:hover,
+    .close-btn:hover {
+      background-color: #ccc;
+    }
+
+    /* Open button styles */
+    .open-btn {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #4CAF50;
+      font-size: 18px;
+    }
+
+    /* Container for three divs */
+    .div-container {
+      display: flex;
+      flex-direction: column; /* Make the divs vertically aligned */
+      align-items: center;
+      padding: 20px;
+      background-color: #f4f4f4;
+      margin-top: 100px;
+    }
+
+    /* Individual div styles */
+    .upload-div {
+      background-color: #3498db;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    /* Content styles */
+    .content {
+      min-height: 500px;
+      padding: 20px;
+    }
+
+    /* New div inside the main content */
+    .new-content {
+      background-color: #e0e0e0;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Vertically aligned divs with buttons */
+    .vertical-div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    /* Button styles */
+    .button-in-div {
+      background-color: #d45a00;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      font-size: 12px;
+      margin-top: 10px; /* Add margin-top for spacing between buttons */
+    }
+
+    /* File input styles (hidden by default) */
+    .file-input {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <!-- Profile icon container -->
+    <div class="profile-icon">
+      <!-- NSFAS logo -->
+      <img class="icon" src="NSFASlogo.jpeg" alt="NSFAS Logo" class="nsfas-logo">
+    </div>
+
+    <!-- Open Button with Icon -->
+    <button class="open-btn" onclick="toggleNavbar()">
+      <!-- Open Icon -->
+      <img src="open-btn.jpeg" alt="Open Icon" class="icon">
+    </button>
+
+    <!-- Right Button -->
+    <button class="right-btn">myNSFAS</button>
+  </div>
+
+  <!-- Left Navbar -->
+  <div class="navbar" id="navbar">
+    <button class="close-btn" onclick="toggleNavbar()">Close Navbar</button>
+    <a href="index.html">Home</a> <!-- Set the href attribute to point to index.html -->
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+    <a href="#" onclick="showDocumentsSection()">Documents</a> <!-- Add a new section for Documents -->
+  </div>
+
+  <!-- Content Section (Placeholder) -->
+  <div class="content">
+    <!-- Add your main content here -->
+
+    <!-- New div inside the main content -->
+    <div class="new-content">
+      <h3>DOCUMENT UPLOAD SECTION</h3>
+      <p></p>
+    </div>
+
+    <!-- Vertically aligned divs with buttons -->
+    <div class="div-container">
+      <div class="vertical-div">
+        <p>A Valid SA ID</p>
+        <button class="button-in-div" onclick="uploadDocument('saId')">Upload</button>
+      </div>
+      <div class="vertical-div">
+        <p>3 Latest payslips</p>
+        <button class="button-in-div" onclick="uploadDocument('payslips')">Upload</button>
+      </div>
+      <div class="vertical-div">
+        <p>3 latest bank statements</p>
+        <button class="button-in-div" onclick="uploadDocument('bankStatements')">Upload</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Section -->
+  <script>
+    var navbar = document.getElementById('navbar');
+
+    // Function to toggle the visibility of the navbar
+    function toggleNavbar() {
+      var currentLeft = parseInt(window.getComputedStyle(navbar).left);
+      if (currentLeft >= 0) {
+        // If navbar is visible, hide it
+        navbar.style.left = "-200px";
+      } else {
+        // If navbar is hidden, show it
+        navbar.style.left = "0";
+      }
+    }
+
+    // Function to show the Documents section (Placeholder)
+    function showDocumentsSection() {
+      var documentsSection = document.getElementById('documents-section');
+      documentsSection.style.display = 'block';
+    }
+
+    // Function to handle document upload
+    function uploadDocument(documentType) {
+      // Create a file input element
+      var fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.className = 'file-input';
+      fileInput.accept = 'application/pdf,image/*'; // Adjust the accepted file types
+
+      // Trigger the file input click event
+      fileInput.click();
+
+      // Handle file selection
+      fileInput.addEventListener('change', function () {
+        var selectedFile = fileInput.files[0];
+        if (selectedFile) {
+          // Perform upload logic here (you may want to send the file to a server)
+          alert('File uploaded successfully!');
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>
